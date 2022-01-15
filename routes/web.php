@@ -20,6 +20,7 @@ Route::view('/results', 'results');
 Route::view('/teamresults', 'teamresults');
 Route::view('/update', 'update');
 Route::get('edit/{id}', [LaravelCrud::class, 'edit']);
+Route::get('trate', [LaravelCrud::class, 'index']);
 Route::get('delete/{id}', [LaravelCrud::class, 'delete']);
 Route::post('update', [LaravelCrud::class, 'update'])->name('update');
 

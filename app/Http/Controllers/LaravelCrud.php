@@ -19,6 +19,13 @@ class LaravelCrud extends Controller
         return view('edit', $data);
     }
 
+    function index()
+    {
+        $tracks = new Track();
+        $tracks = DB::table('tracks');
+        return view('welcome', compact('tracks'));
+    }
+
     function update(Request $request){
         $request->validate([
             'name'=>'required',
