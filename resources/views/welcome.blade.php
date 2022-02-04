@@ -13,15 +13,21 @@
                 <th>Krajina</th>
                 <th>Dátum</th>
                 <th>Čas</th>
+                @auth
+                <th>Edit</th>
+                @endauth
             </tr>
             </thead>
             <tbody>
-                @foreach ($trate as $item)
+                @foreach ($tracks as $item)
                 <tr>
                     <td>{{$item->name}}</td>
                     <td>{{$item->country}}</td>
                     <td>{{$item->date}}</td>
                     <td>{{$item->time}}</td>
+                    @auth
+                    <td></td>
+                    @endauth
                 </tr>
                 @endforeach
             </tbody>
