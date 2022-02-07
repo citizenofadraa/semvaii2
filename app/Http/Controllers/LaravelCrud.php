@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
-use app\Models\Team;
+use App\Models\Track;
 
 class LaravelCrud extends Controller
 {
@@ -23,29 +23,14 @@ class LaravelCrud extends Controller
 
     function index()
     {
-        $tracks = DB::select('select name, country, time, date from tracks');
+        $tracks = DB::select('select * from tracks');
         return view('welcome', ['tracks' => $tracks]);
     }
 
-    function index2()
+    function editIndex()
     {
-        $teams = DB::select('select * from teams');
-        return view('teams', ['teams' => $teams]);
-    }
-
-    function index3()
-    {
-        $data = DB::table('drivers')
-            ->join('teams', 'drivers.id_team', '=', 'teams.id')
-            ->select('drivers.name', 'drivers.country', 'teams.name')
-            ->get();
-        return view('drivers', compact('data'));
-    }
-
-    function index4()
-    {
-        $driverName = DB::select('select name from drivers');
-        return view('results', ['results' => $driverName]);
+        $tracks = DB::select('select * from tracks');
+        return view('tracksedit', ['tracks' => $tracks]);
     }
 
     function update(Request $request){
@@ -60,7 +45,7 @@ class LaravelCrud extends Controller
                 'name'=>$request->input('name'),
                 'email'=>$request->input('email')
             ]);
-            return redirect('update');
+            return redirect('teams');
     }
 
     function delete($id){
@@ -70,12 +55,49 @@ class LaravelCrud extends Controller
         return redirect('/');
     }
 
-    public function updateInLine(Request $request) {
-        if ($request->ajax()) {
-            Team::find($request->pk)
-                ->update([$request->name => $request->value]);
+    function tracksUpdate(Request $request)
+    {
+        $request->validate([
+            'trackname'=>'required',
+            'country'=>'required',
+            'date'=>'required',
+            'time'=>'required'
+        ]);
 
-            return response()->json(['success' => true]);
+        $track = new Track();
+        $track->trackname = $request->input('trackname');
+        $track->country = $request->input('country');
+        $track->date = $request->input('date');
+        $track->time = $request->input('time');
+        $track->save();
+
+        return redirect('/');
+
+    }
+
+    function action(Request $request)
+    {
+        if($request->ajax())
+        {
+            if($request->action == 'edit')
+            {
+                $teams = array(
+                    'trackname'=>$request->trackname,
+                    'country'=>$request->country,
+                    'date'=>$request->date,
+                    'time'=>$request->time
+                );
+                DB::table('tracks')
+                    ->where('id', '=', $request->id)
+                    ->update($teams);
+            }
+            if($request->action == 'delete')
+            {
+                DB::table('tracks')
+                    ->where('id', '=', $request->id)
+                    ->delete();
+            }
+            return response()->json($request);
         }
     }
 }

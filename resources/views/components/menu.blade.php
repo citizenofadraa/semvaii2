@@ -2,7 +2,6 @@
     <a href="/">Index</a>
     <a href="prehlad">Prehľad pravidiel</a>
     <a href="results">Výsledky jazdcov</a>
-    <a href="teamresults">Výsledky tímov</a>
     <a href="drivers">Jazdci</a>
     <a href="teams">Tímy</a>
     @guest
