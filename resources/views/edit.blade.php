@@ -10,12 +10,12 @@
      @csrf
      <input type="hidden" name="cid" value="{{ $Info->id }}">
         <div class="form-group">
-            <label for=""">Name</label>
+            <label for="">Name</label>
             <input name="name" value="{{ $Info->name }}"/>
         </div>
 
         <div class="form-group">
-            <label for=""">Email</label>
+            <label for="">Email</label>
             <input name="email" value="{{ $Info->email }}"/>
         </div>
 

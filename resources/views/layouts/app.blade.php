@@ -15,6 +15,10 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" rel = "stylesheet"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

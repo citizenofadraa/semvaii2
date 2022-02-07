@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@section("title", "Kalendár")
+@section("title", "Jazdci")
 
 @section("content")
 
@@ -13,53 +13,45 @@
                 <th>ID</th>
                 <th>Meno</th>
                 <th>Krajina</th>
-                <th>Dátum</th>
-                <th>Čas</th>
+                <th>Tím</th>
             </tr>
             </thead>
             <tbody>
-                @foreach ($tracks as $item)
-                <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->trackname}}</td>
-                    <td>{{$item->country}}</td>
-                    <td>{{$item->date}}</td>
-                    <td>{{$item->time}}</td>
-                </tr>
-                @endforeach
+            @foreach ($data as $item)
+            <tr>
+                <td>{{$item->id}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->country}}</td>
+                <td>{{$item->teamname}}</td>
+            </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
     @auth
     <div style="text-align: center">
-        <a href="tracksedit">Edit</a>
+        <a href="driversedit">Edit</a>
     </div>
     @endauth
-
 </div>
 
 @auth
-    <form action="{{route('tracks.update')}}" method="post">
+    <form action="{{route('drivers.update')}}" method="post">
         @csrf
 
         <div class="form-group">
-            <label for="">Meno trate</label>
-            <input name="trackname"/>
+            <label for="">Meno jazdca</label>
+            <input name="name"/>
         </div>
 
         <div class="form-group">
-            <label for="">Krajina trate</label>
+            <label for="">Krajina jazdca</label>
             <input name="country"/>
         </div>
 
         <div class="form-group">
-            <label for="">Dátum konania (YYYY-MM-DD)</label>
-            <input name="date"/>
-        </div>
-
-        <div class="form-group">
-            <label for="">Čas konania</label>
-            <input name="time"/>
+            <label for="">Tím jazdca</label>
+            <input name="team"/>
         </div>
 
         <div class="form-group" style="margin-bottom: 60px">
@@ -74,6 +66,3 @@
 </div>
 
 @endsection
-
-<!--</body>
-</html>-->
